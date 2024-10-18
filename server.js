@@ -10,6 +10,16 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Servir la carpeta actual como estática
+app.use(express.static(path.join(__dirname)));
+
+// Escucha en el puerto definido por Vercel o en el puerto 3000
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${port}`);
+});
+
+
 // Ruta para enviar el correo
 app.post('/send-email', (req, res) => {
     const { type } = req.body;

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALARMA SILENCIOSA</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script>
+        async function sendEmail(type) {
+            const response = await fetch('http://localhost:3000/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ type })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</head>
+<body>
+    <img src="https://bosques.edu.mx/wp-content/uploads/2020/05/logos-web-bosques_Mesa-de-trabajo-1-copia-1.png" alt="">
+    <h1>ALARMA SILENCIOSA</h1>
+    <h2>Escoge el siniestro:</h2>
+    <div class="button-container">
+        <button onclick="sendEmail('Intruso')">Intruso
+            <img src="https://us.123rf.com/450wm/tarasdubov/tarasdubov2205/tarasdubov220500216/186403971-ladr%C3%B3n-con-palanca-ladr%C3%B3n-enmascarado-vestido-de-negro-derrib%C3%B3-la-puerta-de-la-casa-problema-de.jpg?ver=6" alt="">
+        </button>
+        <button onclick="sendEmail('Temblor')">Terremoto
+            <img src="https://st2.depositphotos.com/47577860/45632/v/600/depositphotos_456324784-stock-illustration-destruction-building-nature-earthquake-disaster.jpg" alt="">
+        </button>
+        <button onclick="sendEmail('Incendio')">Incendio
+            <img src="https://us.123rf.com/450wm/ahasoft2000/ahasoft20001709/ahasoft2000170911495/86539639-pictograma-de-vector-plano-de-incendio-de-la-casa-una-ilustraci%C3%B3n-aislada-en-un-fondo-blanco.jpg" alt="">
+        </button>
+    </div>
+</body>
+</html>

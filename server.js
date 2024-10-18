@@ -1,6 +1,7 @@
 const express = require('express');
 const nodeMailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path'); 
 
 // Crear la aplicación de Express
 const app = express();
@@ -10,15 +11,12 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Servir la carpeta actual como estática
 app.use(express.static(path.join(__dirname)));
 
-// Escucha en el puerto definido por Vercel o en el puerto 3000
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
+// Para cualquier ruta, devuelve el archivo index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
-
 
 // Ruta para enviar el correo
 app.post('/send-email', (req, res) => {
@@ -43,7 +41,7 @@ app.post('/send-email', (req, res) => {
 
     const mailOptions = {
         from: "dd8466958@gmail.com",
-        to: "estefaniadrpe@gmail.com",
+        to: "hernancortesarechiga@gmail.com",
         subject: `Alerta de Siniestro: ${type}`,
         text: message,
         html: `<h3>${message}</h3>`
